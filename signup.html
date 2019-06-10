@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block content %}	
+
+		<h1>Signup Page</h1>
+		<form method="POST" class="signup-form col-md-4 offset-md-4 col-sm-8 offset-sm-2" action="includes/signup.inc.php">
+			<div class="form-group">
+			
+				{% if first %}
+					<input class="form-control" type="text" name="first" value="{{ first }}" placeholder="First Name">
+				{% else %}
+					<input class="form-control" type="text" name="first" placeholder="First Name">
+				{% endif %}
+				
+				{% if last %}
+					<input class="form-control" type="text" name="last" value="{{ last }}" placeholder="Last Name">
+				{% else %}
+					<input class="form-control" type="text" name="last" placeholder="Last Name">
+				{% endif %}
+				
+				{% if email %}
+					<input class="form-control" type="text" name="email" value="{{ email }}" placeholder="E-Mail">
+				{% else %}
+					<input class="form-control" type="text" name="email" placeholder="E-Mail">
+				{% endif %}
+				
+				{% if uid %}
+					<input class="form-control" type="text" name="uid" value="{{ uid }}" placeholder="Username/E-Mail">
+				{% else %}
+					<input class="form-control" type="text" name="uid" placeholder="Username/E-Mail">
+				{% endif %}
+				
+				<input class="form-control" type="password" name="pwd" placeholder="Password">
+				<input class="form-control" type="password" name="pwd_confirm" placeholder="Confirm Password">
+				
+				{% if phrase %}
+					<input class="form-control" type="text" name="phrase" value="{{ phrase }}'" placeholder="Catch-Phrase">
+				{% else %}
+					<input class="form-control" type="text" name="phrase" placeholder="Catch Phrase">
+				{% endif %}
+				
+				<button class="form-control btn-success submit-btn" type="submit" name="submit" style="margin-top:5px">Signup!</button>
+
+				{% if signup and singup != 'success' %}
+					<button class="form-control btn-danger submit-btn" type="submit" name="clear" style="margin-top:20px">Clear Form</button>
+				{% endif %}
+			</div>
+		</form>
+		{% if signup == 'empty_error' %}
+			<script>alert("Please enter a value into each field.")</script>
+		{% elif signup == 'name_error' %}
+			<script>alert("Please enter a valid name.")</script>
+		{% elif signup == 'email_error' %}
+			<script>alert("Please enter a valid email.")</script>
+		{% elif signup == 'user_taken_error' %}
+			<script>alert("Username has already been taken. Please select another username and try again.")</script>
+		{% elif signup == 'password_match_error' %}
+			<script>alert("Your password was not reentered correctly. Please try again.")</script>
+		{% endif %}
+		
+{% endblock content %}
